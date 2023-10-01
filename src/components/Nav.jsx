@@ -8,7 +8,7 @@ function Nav() {
           </a>
           <div className="w-5/6 h-full flex items-center justify-end">
             <button className="w-1/6 flex items-center justify-center">
-              <img src="src\assets\moon.png" className="bg-cyan-200 w-10 h-10 rounded-full border-2 border-black hover:border-orange-600"></img>
+              <img src="src\assets\moon.png" className="bg-cyan-200 w-10 h-10 rounded-full border-2 border-black hover:border-blue-950"></img>
             </button>
           </div>
         </nav>

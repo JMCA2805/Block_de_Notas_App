@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class TaskList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertMessage: '',
-      alertType: '',
+      alertMessage: "",
+      alertType: "",
       showAlert: false,
-      noteInputValue: '',
-      notes: []
+      noteInputValue: "",
+      notes: [],
     };
   }
 
@@ -20,7 +20,7 @@ class TaskList extends Component {
     if (prevState.showAlert !== this.state.showAlert && this.state.showAlert) {
       setTimeout(() => {
         this.setState({ showAlert: false });
-      }, 2000)
+      }, 2000);
     }
   }
 
@@ -28,53 +28,63 @@ class TaskList extends Component {
     e.preventDefault();
 
     const noteText = this.state.noteInputValue;
-    if (noteText.trim() !== '') {
+    if (noteText.trim() !== "") {
       this.addNoteToLocalStorage(noteText);
-      this.setState({
-        noteInputValue: '',
-        showAlert: true,
-        alertMessage: 'Nota agregada con éxito',
-        alertType: 'success'
-      }, () => {
-        this.loadNotes();
-      });
+      this.setState(
+        {
+          noteInputValue: "",
+          showAlert: true,
+          alertMessage: "Nota agregada con éxito",
+          alertType: "success",
+        },
+        () => {
+          this.loadNotes();
+        }
+      );
     }
   };
 
   editNote = (e) => {
-    if (e.target.classList.contains('edit-button')) {
+    if (e.target.classList.contains("edit-button")) {
       const noteElement = e.target.parentNode;
       const noteId = noteElement.dataset.id;
-      const existingNoteText = noteElement.querySelector('.note-text').textContent;
+      const existingNoteText =
+        noteElement.querySelector(".note-text").textContent;
 
-      const newNoteText = prompt('Escribe una nueva nota:', existingNoteText);
+      const newNoteText = prompt("Escribe una nueva nota:", existingNoteText);
 
-      if (newNoteText != null && newNoteText.trim() !== '') {
+      if (newNoteText != null && newNoteText.trim() !== "") {
         this.updateNoteInLocalStorage(noteId, newNoteText);
-        this.setState({
-          showAlert: true,
-          alertMessage: 'Nota Editada correctamente!',
-          alertType: 'success'
-        }, () => {
-          this.loadNotes();
-        });
+        this.setState(
+          {
+            showAlert: true,
+            alertMessage: "Nota Editada correctamente!",
+            alertType: "success",
+          },
+          () => {
+            this.loadNotes();
+          }
+        );
       }
     }
   };
 
   deleteNote = (e) => {
-    if (e.target.classList.contains('delete-button')) {
+    if (e.target.classList.contains("delete-button")) {
       const noteElement = e.target.parentNode;
       const noteId = noteElement.dataset.id;
 
       this.deleteNoteFromLocalStorage(noteId);
-      this.setState({
-        showAlert: true,
-        alertMessage: 'Nota eliminada con éxito',
-        alertType: 'success'
-      }, () => {
-        this.loadNotes();
-      });
+      this.setState(
+        {
+          showAlert: true,
+          alertMessage: "Nota eliminada con éxito",
+          alertType: "success",
+        },
+        () => {
+          this.loadNotes();
+        }
+      );
     }
   };
 
@@ -84,7 +94,7 @@ class TaskList extends Component {
   };
 
   getNotesFromLocalStorage = () => {
-    let notes = localStorage.getItem('notes');
+    let notes = localStorage.getItem("notes");
     if (notes === null) {
       return [];
     } else {
@@ -96,7 +106,7 @@ class TaskList extends Component {
     const notes = this.getNotesFromLocalStorage();
     const newNote = { id: Date.now(), text: text };
     notes.push(newNote);
-    localStorage.setItem('notes', JSON.stringify(notes));
+    localStorage.setItem("notes", JSON.stringify(notes));
   };
 
   updateNoteInLocalStorage = (id, newText) => {
@@ -104,14 +114,14 @@ class TaskList extends Component {
     const noteToUpdate = notes.find((note) => note.id == id);
     if (noteToUpdate != null) {
       noteToUpdate.text = newText;
-      localStorage.setItem('notes', JSON.stringify(notes));
+      localStorage.setItem("notes", JSON.stringify(notes));
     }
   };
 
   deleteNoteFromLocalStorage = (id) => {
     const notes = this.getNotesFromLocalStorage();
     const updatedNotes = notes.filter((note) => note.id != id);
-    localStorage.setItem('notes', JSON.stringify(updatedNotes));
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
   };
 
   handleNoteInputChange = (e) => {
@@ -119,28 +129,53 @@ class TaskList extends Component {
   };
 
   render() {
-    const { showAlert, alertMessage, alertType, noteInputValue, notes } = this.state;
+    const { showAlert, alertMessage, alertType, noteInputValue, notes } =
+      this.state;
 
     return (
-      <div className='h-full'>
-        <h1>Block de Notas</h1>
+      <div>
         {showAlert && (
-          <div className={`alert ${alertType}`}>
-            {alertMessage}
-          </div>
+          <div className={`alert ${alertType}`}>{alertMessage}</div>
         )}
-        <form id="form" onSubmit={this.addNote}>
-          <input type="text" id="noteInput" value={noteInputValue} onChange={this.handleNoteInputChange} />
-          <button type="submit">Agregar nota</button>
+        <form
+          id="form"
+          onSubmit={this.addNote}
+          className="border-b border-gray-200 h-32 flex items-center justify-center"
+        >
+          <textarea
+            id="noteInput"
+            value={noteInputValue}
+            onChange={this.handleNoteInputChange}
+            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
+          />
+          <button
+            type="submit"
+            className="w-32 h-8 text-center rounded-md bg-gray-100 border-2 border-cyan-400 hover:border-blue-950 hover:bg-gray-200"
+          >
+            Agregar
+          </button>
         </form>
-        <div id="notesContainer">
-          {notes.map((note) => (
-            <div key={note.id} className="note" data-id={note.id}>
-              <span className="note-text">{note.text}</span>
-              <button className="edit-button" onClick={this.editNote}>🖊</button>
-              <button className="delete-button" onClick={this.deleteNote}>❌</button>
-            </div>
-          ))}
+        <div className="flex justify-center p-8 ">
+          <div
+            id="notesContainer"
+            className="grid gap-16 grid-cols-4 justify-center"
+          >
+            {notes.map((note) => (
+              <div
+                key={note.id}
+                className="bg-purple-300 w-64 p-2 h-64 rounded-xl"
+                data-id={note.id}
+              >
+                <span className="note-text">{note.text}</span>
+                <button className="edit-button" onClick={this.editNote}>
+                  🖊
+                </button>
+                <button className="delete-button" onClick={this.deleteNote}>
+                  ❌
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
