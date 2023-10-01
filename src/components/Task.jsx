@@ -163,16 +163,18 @@ class TaskList extends Component {
             {notes.map((note) => (
               <div
                 key={note.id}
-                className="bg-purple-300 w-64 p-2 h-64 rounded-xl"
+                className="bg-purple-300 p-2 h-64 rounded-xl"
                 data-id={note.id}
               >
-                <span className="note-text">{note.text}</span>
-                <button className="edit-button" onClick={this.editNote}>
-                  🖊
-                </button>
-                <button className="delete-button" onClick={this.deleteNote}>
-                  ❌
-                </button>
+                <div>
+                  <button className="edit-button" onClick={this.editNote}>
+                    🖊
+                  </button>
+                  <button className="delete-button" onClick={this.deleteNote}>
+                    ❌
+                  </button>
+                </div>
+                <span className="break-all">{note.text}</span>
               </div>
             ))}
           </div>
