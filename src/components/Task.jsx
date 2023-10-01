@@ -151,7 +151,7 @@ class TaskList extends Component {
         >
           <textarea
             id="titleInput"
-            placeholder="Title"
+            placeholder="Titulo"
             value={titleInputValue}
             onChange={this.handleTitleInputChange}
             className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
