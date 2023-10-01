@@ -30,7 +30,7 @@ class TaskList extends Component {
 
     const noteText = this.state.noteInputValue;
     const titleText = this.state.titleInputValue;
-    if (noteText.trim() !== '' && titleText.trim() !== '' ) {
+    if (noteText.trim() !== "" && titleText.trim() !== "") {
       this.addNoteToLocalStorage(noteText, titleText);
       this.setState(
         {
@@ -136,8 +136,14 @@ class TaskList extends Component {
   };
 
   render() {
-    const { showAlert, alertMessage, alertType, noteInputValue, titleInputValue, notes } =
-      this.state;
+    const {
+      showAlert,
+      alertMessage,
+      alertType,
+      noteInputValue,
+      titleInputValue,
+      notes,
+    } = this.state;
 
     return (
       <div>
@@ -149,12 +155,13 @@ class TaskList extends Component {
           onSubmit={this.addNote}
           className="border-b border-gray-200 h-32 flex items-center justify-center"
         >
-          <textarea
+          <input
+            type="text"
             id="titleInput"
             placeholder="Titulo"
             value={titleInputValue}
             onChange={this.handleTitleInputChange}
-            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
+            className="resize-none mx-5 w-72 h-10 text-center p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
           />
           <textarea
             id="noteInput"
@@ -181,13 +188,16 @@ class TaskList extends Component {
                 className="bg-purple-300 p-2 h-64 rounded-xl"
                 data-id={note.id}
               >
-                <div>
-                  <button className="edit-button" onClick={this.editNote}>
-                    🖊
-                  </button>
-                  <button className="delete-button" onClick={this.deleteNote}>
-                    ❌<span className="break-all">{note.title }</span>
-                  </button>
+                <div className="border-b border-gray-700 dark:border-white flex">
+                  <span className="break-all h-5 overflow-hidden w-3/4 text-center font-extrabold hover:overflow-visible hover:h-auto">{note.title}</span>
+                  <div className="w-1/4 flex justify-center items-center">
+                    <button className="edit-button" onClick={this.editNote}>
+                      🖊
+                    </button>
+                    <button className="delete-button" onClick={this.deleteNote}>
+                      ❌
+                    </button>
+                  </div>
                 </div>
                 <span className="break-all">{note.text}</span>
               </div>
