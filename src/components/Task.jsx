@@ -122,7 +122,7 @@ class TaskList extends Component {
     const { showAlert, alertMessage, alertType, noteInputValue, notes } = this.state;
 
     return (
-      <div>
+      <div className='h-full'>
         <h1>Block de Notas</h1>
         {showAlert && (
           <div className={`alert ${alertType}`}>

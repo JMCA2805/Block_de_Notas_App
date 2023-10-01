@@ -5,9 +5,9 @@ import TaskList from './components/Task'
 function App() {
   return (
     <>
-      <Nav></Nav>
-      <Footer></Footer>
+      <Nav/>
       <TaskList/>
+      <Footer/>
     </>
   )
 }

@@ -6,7 +6,7 @@
 - Adolfo Ochoa 30.302.062
 - Jose Mauricio Camacho  29.739.132
 - Yetzenia Mendoa 27.268.361
-- Carlos Pimiento 
+- Carlos Pimiento 27.497.945
 
 # Comandos
     npm run dev

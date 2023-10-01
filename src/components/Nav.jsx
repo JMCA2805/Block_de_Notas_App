@@ -1,14 +1,14 @@
 function Nav() {
   return (
     <>
-      <header>
-        <nav>
-          <a>
-            <span>Block de Notas</span>
+      <header className="h-12 w-full">
+        <nav className="flex	items-center justify-center h-12 bg-cyan-400 shadow-lg">
+          <a className="w-1/6 flex items-center justify-center" >
+            <span className=" text-xl font-extrabold text-center">Block de Notas</span>
           </a>
-          <div>
-            <button>
-              Modo Oscuro
+          <div className="w-5/6 h-full flex items-center justify-end">
+            <button className="w-1/6 flex items-center justify-center">
+              <img src="src\assets\moon.png" className="bg-cyan-200 w-10 h-10 rounded-full border-2 border-black hover:border-orange-600"></img>
             </button>
           </div>
         </nav>
