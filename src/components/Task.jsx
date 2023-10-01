@@ -8,6 +8,7 @@ class TaskList extends Component {
       alertType: "",
       showAlert: false,
       noteInputValue: "",
+      titleInputValue: "",
       notes: [],
     };
   }
@@ -28,11 +29,13 @@ class TaskList extends Component {
     e.preventDefault();
 
     const noteText = this.state.noteInputValue;
-    if (noteText.trim() !== "") {
-      this.addNoteToLocalStorage(noteText);
+    const titleText = this.state.titleInputValue;
+    if (noteText.trim() !== '' && titleText.trim() !== '' ) {
+      this.addNoteToLocalStorage(noteText, titleText);
       this.setState(
         {
           noteInputValue: "",
+          titleInputValue: "",
           showAlert: true,
           alertMessage: "Nota agregada con éxito",
           alertType: "success",
@@ -102,9 +105,9 @@ class TaskList extends Component {
     }
   };
 
-  addNoteToLocalStorage = (text) => {
+  addNoteToLocalStorage = (text, titleText) => {
     const notes = this.getNotesFromLocalStorage();
-    const newNote = { id: Date.now(), text: text };
+    const newNote = { id: Date.now(), text: text, title: titleText };
     notes.push(newNote);
     localStorage.setItem("notes", JSON.stringify(notes));
   };
@@ -120,6 +123,7 @@ class TaskList extends Component {
 
   deleteNoteFromLocalStorage = (id) => {
     const notes = this.getNotesFromLocalStorage();
+    alert(notes.id);
     const updatedNotes = notes.filter((note) => note.id != id);
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
   };
@@ -127,9 +131,12 @@ class TaskList extends Component {
   handleNoteInputChange = (e) => {
     this.setState({ noteInputValue: e.target.value });
   };
+  handleTitleInputChange = (e) => {
+    this.setState({ titleInputValue: e.target.value });
+  };
 
   render() {
-    const { showAlert, alertMessage, alertType, noteInputValue, notes } =
+    const { showAlert, alertMessage, alertType, noteInputValue, titleInputValue, notes } =
       this.state;
 
     return (
@@ -142,6 +149,12 @@ class TaskList extends Component {
           onSubmit={this.addNote}
           className="border-b border-gray-200 h-32 flex items-center justify-center"
         >
+          <textarea
+            id="titleInput"
+            value={titleInputValue}
+            onChange={this.handleTitleInputChange}
+            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
+          />
           <textarea
             id="noteInput"
             value={noteInputValue}
@@ -171,7 +184,7 @@ class TaskList extends Component {
                     🖊
                   </button>
                   <button className="delete-button" onClick={this.deleteNote}>
-                    ❌
+                    ❌<span className="break-all">{note.title }</span>
                   </button>
                 </div>
                 <span className="break-all">{note.text}</span>
