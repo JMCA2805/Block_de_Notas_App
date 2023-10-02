@@ -55,7 +55,6 @@ class TaskList extends Component {
         noteElement.querySelector(".note-text").textContent;
 
       const newNoteText = prompt("Escribe una nueva nota:", existingNoteText);
-
       if (newNoteText != null && newNoteText.trim() !== "") {
         this.updateNoteInLocalStorage(noteId, newNoteText);
         this.setState(
@@ -75,6 +74,7 @@ class TaskList extends Component {
   deleteNote = (e) => {
     if (e.target.classList.contains("delete-button")) {
       const noteElement = e.target.parentNode;
+      console.log(noteElement);
       const noteId = noteElement.dataset.id;
 
       this.deleteNoteFromLocalStorage(noteId);
@@ -180,26 +180,28 @@ class TaskList extends Component {
         <div className="flex justify-center p-8 ">
           <div
             id="notesContainer"
-            className="grid gap-16 grid-cols-4 justify-center"
+            className="grid gap-16 grid-cols-4 justify-center w-full"
           >
             {notes.map((note) => (
               <div
                 key={note.id}
-                className="bg-purple-300 p-2 h-64 rounded-xl"
+                className="bg-purple-300 p-2 h-64 w-full rounded-xl"
                 data-id={note.id}
               >
-                <div className="border-b border-gray-700 dark:border-white flex">
-                  <span className="break-all h-5 overflow-hidden w-3/4 text-center font-extrabold hover:overflow-visible hover:h-auto">{note.title}</span>
-                  <div className="w-1/4 flex justify-center items-center">
-                    <button className="edit-button" onClick={this.editNote}>
-                      🖊
-                    </button>
-                    <button className="delete-button" onClick={this.deleteNote}>
-                      ❌
-                    </button>
-                  </div>
+                <div className="w-full flex justify-center items-center">
+                  <span className="break-all h-5 overflow-hidden text-center font-extrabold hover:overflow-visible hover:h-auto">
+                    {note.title}
+                  </span>
                 </div>
-                <span className="break-all">{note.text}</span>
+                <button className=" edit-button rounded-full border border-black dark:border-white" onClick={this.editNote}>
+                  🖊
+                </button>
+                <button className=" delete-button rounded-full border border-black dark:border-white ml-1" onClick={this.deleteNote}>
+                  ❌
+                </button>
+                <div className="border-t mt-1 border-gray-700 dark:border-white w-full  overflow-auto max-h-48">
+                  <span className="note-text break-all">{note.text}</span>
+                </div>
               </div>
             ))}
           </div>
