@@ -124,7 +124,6 @@ class TaskList extends Component {
 
   deleteNoteFromLocalStorage = (id) => {
     const notes = this.getNotesFromLocalStorage();
-    alert(notes.id);
     const updatedNotes = notes.filter((note) => note.id != id);
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
   };
@@ -134,11 +133,6 @@ class TaskList extends Component {
   };
   handleTitleInputChange = (e) => {
     this.setState({ titleInputValue: e.target.value });
-  };
-
-  handleSetSearchText = (e) => {
-    console.log(e.target.value);
-    this.setState({ valueToSearch: e.target.value });
   };
 
   render() {
@@ -154,7 +148,7 @@ class TaskList extends Component {
     return (
       <div>
         {showAlert && (
-          <div className={`alert ${alertType}`}>{alertMessage}</div>
+          <div className={`${alertType}`}>{alertMessage}</div>
         )}
         <form
           id="form"
@@ -235,3 +229,4 @@ class TaskList extends Component {
 }
 
 export default TaskList;
+
