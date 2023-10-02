@@ -75,6 +75,7 @@ class TaskList extends Component {
   deleteNote = (e) => {
     if (e.target.classList.contains("delete-button")) {
       const noteElement = e.target.parentNode;
+      console.log(noteElement);
       const noteId = noteElement.dataset.id;
 
       this.deleteNoteFromLocalStorage(noteId);
@@ -133,12 +134,6 @@ class TaskList extends Component {
   handleTitleInputChange = (e) => {
     this.setState({ titleInputValue: e.target.value });
   };
-
-  handleSetSearchText = (e) => {
-    console.log(e.target.value);
-    this.setState({ valueToSearch: e.target.value });
-  };
-
   render() {
     const {
       showAlert,
@@ -154,7 +149,7 @@ class TaskList extends Component {
         <form
           id="form"
           onSubmit={this.addNote}
-          className="border-b dark:border-gray-800 border-gray-300 h-32 flex items-center justify-center"
+          className="border-b dark:border-gray-800 border-gray-300 sm:flex items-center justify-center"
         >
           <input
             type="text"
@@ -162,18 +157,18 @@ class TaskList extends Component {
             placeholder="Titulo"
             value={titleInputValue}
             onChange={this.handleTitleInputChange}
-            className="resize-none mx-5 w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
+            className="resize-none mx-5 w-full sm:w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <textarea
             id="noteInput"
             placeholder="Texto"
             value={noteInputValue}
             onChange={this.handleNoteInputChange}
-            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
+            className="resize-none mx-5 w-full sm:w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <button
             type="submit"
-            className="w-32 h-8 text-center rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
+            className="w-32 sm:w-24 h-8 text-center rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
           >
             Agregar
           </button>
@@ -184,20 +179,20 @@ class TaskList extends Component {
             type="search"
             placeholder="Buscar"
             onChange={this.handleSetSearchText}
-            className="w-64 h-8 text-center rounded-md border-cyan-950 bg-gray-200 dark:bg-gray-900 border-2 dark:border-blue-950 dark:hover:bg-gray-800 dark:text-white"
+            className="w-full sm:w-64 h-8 text-center rounded-md border-cyan-950 bg-gray-200 dark:bg-gray-900 border-2 dark:border-blue-950 dark:hover:bg-gray-800 dark:text-white"
           />
         </div>
         <div className="w-full flex items-center justify-center">
           {showAlert && (
-            <div className={`${alertType}` + " dark:text-white text-center"}>
+            <div className={`${alertType} dark:text-white text-center`}>
               {alertMessage}
             </div>
           )}
         </div>
-        <div className="flex justify-center p-8 ">
+        <div className="flex justify-center p-2 sm:p-8 ">
           <div
             id="notesContainer"
-            className="grid gap-16 grid-cols-4 justify-center w-full"
+            className="grid gap-6 sm:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center w-full"
           >
             {notes
               .filter(
@@ -213,7 +208,7 @@ class TaskList extends Component {
               .map((note) => (
                 <div
                   key={note.id}
-                  className="bg-cyan-600 dark:bg-cyan-800 p-2 h-64 w-full rounded-xl"
+                  className="bg-cyan-600 dark:bg-cyan-800 p-2 h-48 sm:h-64 w-full rounded-xl"
                   data-id={note.id}
                 >
                   <div className="w-full flex justify-center items-center">
@@ -222,18 +217,18 @@ class TaskList extends Component {
                     </span>
                   </div>
                   <button
-                    className=" edit-button rounded-full border dark:border-gray-800 border-gray-300"
+                    className="edit-button rounded-full border dark:border-gray-800 border-gray-300"
                     onClick={this.editNote}
                   >
                     🖊
                   </button>
                   <button
-                    className=" delete-button rounded-full border dark:border-gray-800 border-gray-300 ml-1"
+                    className="delete-button rounded-full border dark:border-gray-800 border-gray-300 ml-1"
                     onClick={this.deleteNote}
-                  >
+                     >
                     ❌
                   </button>
-                  <div className="border-t mt-1 border-gray-300 dark:border-gray-800 w-full  overflow-auto max-h-48">
+                  <div className="border-t mt-1 border-gray-300 dark:border-gray-800 w-full overflow-auto max-h-24 sm:max-h-48">
                     <span className="note-text break-all dark:text-white">
                       {note.text}
                     </span>
