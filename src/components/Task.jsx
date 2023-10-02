@@ -9,6 +9,7 @@ class TaskList extends Component {
       showAlert: false,
       noteInputValue: "",
       titleInputValue: "",
+      valueToSearch: "",
       notes: [],
     };
   }
@@ -135,6 +136,11 @@ class TaskList extends Component {
     this.setState({ titleInputValue: e.target.value });
   };
 
+  handleSetSearchText = (e) => {
+    console.log(e.target.value);
+    this.setState({ valueToSearch: e.target.value });
+  };
+
   render() {
     const {
       showAlert,
@@ -177,12 +183,29 @@ class TaskList extends Component {
             Agregar
           </button>
         </form>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Buscar"
+          onChange={this.handleSetSearchText}
+        />
         <div className="flex justify-center p-8 ">
           <div
             id="notesContainer"
             className="grid gap-16 grid-cols-4 justify-center w-full"
           >
-            {notes.map((note) => (
+            {notes
+              .filter(
+                (note) =>
+                  note.title
+                    .toUpperCase()
+                    .includes(this.state.valueToSearch.toUpperCase()) ||
+                  note.text
+                    .toUpperCase()
+                    .includes(this.state.valueToSearch.toUpperCase())
+              )
+              .sort((a, b) => a.id - b.id)
+              .map((note) => (
               <div
                 key={note.id}
                 className="bg-purple-300 p-2 h-64 w-full rounded-xl"
