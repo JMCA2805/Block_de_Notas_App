@@ -147,13 +147,10 @@ class TaskList extends Component {
 
     return (
       <div>
-        {showAlert && (
-          <div className={`${alertType}`}>{alertMessage}</div>
-        )}
         <form
           id="form"
           onSubmit={this.addNote}
-          className="border-b border-gray-200 h-32 flex items-center justify-center"
+          className="border-b dark:border-gray-800 border-gray-300 h-32 flex items-center justify-center"
         >
           <input
             type="text"
@@ -161,28 +158,38 @@ class TaskList extends Component {
             placeholder="Titulo"
             value={titleInputValue}
             onChange={this.handleTitleInputChange}
-            className="resize-none mx-5 w-72 h-10 text-center p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
+            className="resize-none mx-5 w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <textarea
             id="noteInput"
             placeholder="Texto"
             value={noteInputValue}
             onChange={this.handleNoteInputChange}
-            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 border-cyan-400 bg-gray-100 focus:border-blue-950 focus:bg-gray-200"
+            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <button
             type="submit"
-            className="w-32 h-8 text-center rounded-md bg-gray-100 border-2 border-cyan-400 hover:border-blue-950 hover:bg-gray-200"
+            className="w-32 h-8 text-center rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
           >
             Agregar
           </button>
         </form>
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="Buscar"
-          onChange={this.handleSetSearchText}
-        />
+        <div className="w-full flex items-center justify-center h-12">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Buscar"
+            onChange={this.handleSetSearchText}
+            className="w-64 h-8 text-center rounded-md border-cyan-950 bg-gray-200 dark:bg-gray-900 border-2 dark:border-blue-950 dark:hover:bg-gray-800 dark:text-white"
+          />
+        </div>
+        <div className="w-full flex items-center justify-center">
+          {showAlert && (
+            <div className={`${alertType}` + " dark:text-white text-center"}>
+              {alertMessage}
+            </div>
+          )}
+        </div>
         <div className="flex justify-center p-8 ">
           <div
             id="notesContainer"
@@ -200,27 +207,35 @@ class TaskList extends Component {
               )
               .sort((a, b) => a.id - b.id)
               .map((note) => (
-              <div
-                key={note.id}
-                className="bg-purple-300 p-2 h-64 w-full rounded-xl"
-                data-id={note.id}
-              >
-                <div className="w-full flex justify-center items-center">
-                  <span className="break-all h-5 overflow-hidden text-center font-extrabold hover:overflow-visible hover:h-auto">
-                    {note.title}
-                  </span>
+                <div
+                  key={note.id}
+                  className="bg-cyan-600 dark:bg-cyan-800 p-2 h-64 w-full rounded-xl"
+                  data-id={note.id}
+                >
+                  <div className="w-full flex justify-center items-center">
+                    <span className="break-all h-5 overflow-hidden text-center font-extrabold hover:overflow-visible hover:h-auto dark:text-white">
+                      {note.title}
+                    </span>
+                  </div>
+                  <button
+                    className=" edit-button rounded-full border dark:border-gray-800 border-gray-300"
+                    onClick={this.editNote}
+                  >
+                    🖊
+                  </button>
+                  <button
+                    className=" delete-button rounded-full border dark:border-gray-800 border-gray-300 ml-1"
+                    onClick={this.deleteNote}
+                  >
+                    ❌
+                  </button>
+                  <div className="border-t mt-1 border-gray-300 dark:border-gray-800 w-full  overflow-auto max-h-48">
+                    <span className="note-text break-all dark:text-white">
+                      {note.text}
+                    </span>
+                  </div>
                 </div>
-                <button className=" edit-button rounded-full border border-black dark:border-white" onClick={this.editNote}>
-                  🖊
-                </button>
-                <button className=" delete-button rounded-full border border-black dark:border-white ml-1" onClick={this.deleteNote}>
-                  ❌
-                </button>
-                <div className="border-t mt-1 border-gray-700 dark:border-white w-full  overflow-auto max-h-48">
-                  <span className="note-text break-all">{note.text}</span>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
@@ -229,4 +244,3 @@ class TaskList extends Component {
 }
 
 export default TaskList;
-
