@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark #theme_git{
+    content: url("src/assets/GitHub.png")
+}
+#theme_git{
+    content: url("src/assets/GitHub_Black.png")
+}
