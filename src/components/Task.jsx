@@ -75,7 +75,6 @@ class TaskList extends Component {
   deleteNote = (e) => {
     if (e.target.classList.contains("delete-button")) {
       const noteElement = e.target.parentNode;
-      console.log(noteElement);
       const noteId = noteElement.dataset.id;
 
       this.deleteNoteFromLocalStorage(noteId);
@@ -133,6 +132,11 @@ class TaskList extends Component {
   };
   handleTitleInputChange = (e) => {
     this.setState({ titleInputValue: e.target.value });
+  };
+
+  handleSetSearchText = (e) => {
+    console.log(e.target.value);
+    this.setState({ valueToSearch: e.target.value });
   };
 
   render() {
