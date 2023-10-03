@@ -25,14 +25,14 @@ function Nav() {
   return (
     <header className="h-12 w-full">
       <nav className="flex items-center justify-center h-12 bg-cyan-500 shadow-lg dark:bg-blue-950 sm:flex-col md:flex-row">
-        <a className="w-1/6 flex items-center justify-center">
-          <span className="text-xl font-extrabold text-center dark:text-white">
+        <a className="ssm:w-2/3 w-1/6 flex items-center justify-center">
+          <span className=" ssm:text-sm lg:text-xl font-extrabold text-center dark:text-white">
             Block de Notas
           </span>
         </a>
-        <div className="w-5/6 h-full flex items-center justify-end">
+        <div className="ssm:w-1/3 w-5/6 h-full flex items-center justify-end">
           <button
-            className="w-1/6 flex items-center justify-center"
+            className="ssm:w-1/2 ssm:mr-4 w-1/6 flex items-center justify-center"
             onClick={handleChangeTheme}
           >
             <div className="w-9 h-9 shadow-lg bg-cyan-300 hover:bg-cyan-400 rounded-full hover:dark:bg-blue-800 dark:bg-blue-600 flex items-center justify-center">

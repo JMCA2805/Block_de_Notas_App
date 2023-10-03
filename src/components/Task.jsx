@@ -153,7 +153,7 @@ class TaskList extends Component {
         <form
           id="form"
           onSubmit={this.addNote}
-          className="border-b dark:border-gray-800 border-gray-300 flex items-center justify-center py-5"
+          className="border-b dark:border-gray-800 border-gray-300 ssm:block flex items-center justify-center py-5"
         >
           <input
             type="text"
@@ -161,18 +161,18 @@ class TaskList extends Component {
             placeholder="Titulo"
             value={titleInputValue}
             onChange={this.handleTitleInputChange}
-            className="resize-none mx-5 w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
+            className="resize-none mx-5 ssm:mb-2 ssm:w-1/1 w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <textarea
             id="noteInput"
             placeholder="Texto"
             value={noteInputValue}
             onChange={this.handleNoteInputChange}
-            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
+            className="resize-none ssm:mb-2 mx-5 ssm:w-72 w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <button
             type="submit"
-            className="w-32 h-8 text-center rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
+            className="w-32 h-8 text-center ssm:mx-5 rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
           >
             Agregar
           </button>
@@ -196,7 +196,7 @@ class TaskList extends Component {
         <div className="flex justify-center px-8 py-3">
           <div
             id="notesContainer"
-            className="grid gap-6 grid-cols-4 justify-center w-full"
+            className="grid gap-6 ssm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-cols-4 justify-center w-full"
           >
             {notes
               .filter(

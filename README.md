@@ -27,6 +27,7 @@
 - Mensaje personalizados en las alertas
 - Modo Claro-Oscuro
 - Modo predeterminado según el sistema
+- Responsive mobile, computadora y tablet
 
 # Instrucciones
 
