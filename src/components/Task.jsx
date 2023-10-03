@@ -134,6 +134,10 @@ class TaskList extends Component {
   handleTitleInputChange = (e) => {
     this.setState({ titleInputValue: e.target.value });
   };
+  handleSetSearchText = (e) => {
+    this.setState({ valueToSearch: e.target.value });
+  }
+  
   render() {
     const {
       showAlert,
@@ -149,7 +153,7 @@ class TaskList extends Component {
         <form
           id="form"
           onSubmit={this.addNote}
-          className="border-b dark:border-gray-800 border-gray-300 sm:flex items-center justify-center"
+          className="border-b dark:border-gray-800 border-gray-300 flex items-center justify-center py-5"
         >
           <input
             type="text"
@@ -157,18 +161,18 @@ class TaskList extends Component {
             placeholder="Titulo"
             value={titleInputValue}
             onChange={this.handleTitleInputChange}
-            className="resize-none mx-5 w-full sm:w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
+            className="resize-none mx-5 w-72 h-10 text-center p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <textarea
             id="noteInput"
             placeholder="Texto"
             value={noteInputValue}
             onChange={this.handleNoteInputChange}
-            className="resize-none mx-5 w-full sm:w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
+            className="resize-none mx-5 w-96 h-20 text-justify p-2 rounded-md border-2 bg-gray-200 border-cyan-950 dark:border-blue-950 dark:bg-gray-900 dark:text-white"
           />
           <button
             type="submit"
-            className="w-32 sm:w-24 h-8 text-center rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
+            className="w-32 h-8 text-center rounded-md dark:bg-gray-900 border-2 border-cyan-950 hover:border-cyan-800 bg-cyan-500 hover:bg-cyan-600 dark:border-blue-950 dark:hover:border-blue-900 dark:hover:bg-gray-800 dark:text-white"
           >
             Agregar
           </button>
@@ -179,7 +183,7 @@ class TaskList extends Component {
             type="search"
             placeholder="Buscar"
             onChange={this.handleSetSearchText}
-            className="w-full sm:w-64 h-8 text-center rounded-md border-cyan-950 bg-gray-200 dark:bg-gray-900 border-2 dark:border-blue-950 dark:hover:bg-gray-800 dark:text-white"
+            className=":w-64 h-8 text-center rounded-md border-cyan-950 bg-gray-200 dark:bg-gray-900 border-2 dark:border-blue-950 dark:hover:bg-gray-800 dark:text-white"
           />
         </div>
         <div className="w-full flex items-center justify-center">
@@ -189,10 +193,10 @@ class TaskList extends Component {
             </div>
           )}
         </div>
-        <div className="flex justify-center p-2 sm:p-8 ">
+        <div className="flex justify-center px-8 py-3">
           <div
             id="notesContainer"
-            className="grid gap-6 sm:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center w-full"
+            className="grid gap-6 grid-cols-4 justify-center w-full"
           >
             {notes
               .filter(
@@ -208,7 +212,7 @@ class TaskList extends Component {
               .map((note) => (
                 <div
                   key={note.id}
-                  className="bg-cyan-600 dark:bg-cyan-800 p-2 h-48 sm:h-64 w-full rounded-xl"
+                  className="bg-cyan-600 dark:bg-cyan-800 p-2 h-48 w-full rounded-xl"
                   data-id={note.id}
                 >
                   <div className="w-full flex justify-center items-center">

@@ -8,3 +8,15 @@
 #theme_git{
     content: url("src/assets/GitHub_Black.png")
 }
+
+@media (max-width: 640px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer-item {
+      margin-bottom: 1rem;
+    }
+  }
+
